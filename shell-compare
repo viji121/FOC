@@ -1,0 +1,8 @@
+$string1 = "srinivasan"
+$string2 = "srinivasan"
+if ($string1 -eq $string2)
+{
+  write-output "the strings are equal."
+} else {
+write-output "the strings are not equal."
+}
