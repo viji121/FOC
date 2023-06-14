@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+int main() {
+    float loanAmount = 3000.0;
+    float monthlyPayment = 85.0;
+    float interestRate = 0.01;  // 1% per month
+    float balance = loanAmount;
+    int months = 0;
+    float totalInterest = 0.0;
+
+    printf("Loan Amount: $%.2f\n", loanAmount);
+    printf("Monthly Payment: $%.2f\n", monthlyPayment);
+
+    printf("\nPayment Schedule:\n");
+    printf("Month\tPrincipal\tInterest\tBalance\n");
+
+    while (balance > 0) {
+        float interest = balance * interestRate;
+        float principal = monthlyPayment - interest;
+
+        if (principal > balance) {
+            principal = balance;
+        }
+
+        balance -= principal;
+        totalInterest += interest;
+        months++;
+
+        printf("%d\t$%.2f\t$%.2f\t$%.2f\n", months, principal, interest, balance);
+
+        if (balance <= 0) {
+            break;
+        }
+    }
+
+    int years = months / 12;
+    int remainingMonths = months % 12;
+
+    printf("\nIt will take %d years and %d months to pay back the loan.\n", years, remainingMonths);
+    printf("Total Interest Paid: $%.2f\n", totalInterest);
+
+    return 0;
+}
