@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+#define NUM_LEVELS 5
+#define NUM_MAJORS 7
+
+int main() {
+    int students[NUM_LEVELS] = {0}; // Array to store the number of students in each level
+    int majorCounts[NUM_MAJORS] = {0}; // Array to store the number of students with each major
+    int declaredCounts[NUM_LEVELS][NUM_MAJORS] = {0}; // Array to store the number of each class level that have declared each major
+    int totalStudents, level, major;
+
+    printf("Enter the total number of students attending the university: ");
+    scanf("%d", &totalStudents);
+
+    for (int i = 0; i < totalStudents; i++) {
+        printf("\nStudent %d:\n", i + 1);
+
+        printf("Enter the class level (1-4 for undergraduate, 5 for graduate): ");
+        scanf("%d", &level);
+        students[level - 1]++;
+
+        printf("Enter the major (1-7 for majors, 0 if no major): ");
+        scanf("%d", &major);
+        majorCounts[major - 1]++;
+        if (major > 0)
+            declaredCounts[level - 1][major - 1]++;
+    }
+
+    printf("\nNumber of students in each level:\n");
+    for (int i = 0; i < NUM_LEVELS; i++) {
+        printf("Level %d: %d\n", i + 1, students[i]);
+    }
+
+    printf("\nNumber of students with each major:\n");
+    for (int i = 0; i < NUM_MAJORS; i++) {
+        printf("Major %d: %d\n", i + 1, majorCounts[i]);
+    }
+
+    printf("\nNumber of each class level that have declared each major:\n");
+    for (int i = 0; i < NUM_LEVELS; i++) {
+        for (int j = 0; j < NUM_MAJORS; j++) {
+            printf("Level %d, Major %d: %d\n", i + 1, j + 1, declaredCounts[i][j]);
+        }
+    }
+
+    return 0;
+}
