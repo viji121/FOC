@@ -1,0 +1,49 @@
+#include <stdio.h>
+
+#define NUM_DAYS 14
+
+int main() {
+    float windSpeeds[NUM_DAYS];
+    float sum = 0;
+    float maxSpeed = 0, minSpeed = 0;
+    int maxDay = 0, minDay = 0;
+
+    // Input wind speeds for each day
+    printf("Enter the fastest wind speed for each day:\n");
+    for (int i = 0; i < NUM_DAYS; i++) {
+        printf("Day %d: ", i + 1);
+        scanf("%f", &windSpeeds[i]);
+
+        // Calculate sum of wind speeds
+        sum += windSpeeds[i];
+
+        // Check for the highest wind speed
+        if (windSpeeds[i] > maxSpeed) {
+            maxSpeed = windSpeeds[i];
+            maxDay = i + 1;
+        }
+
+        // Check for the lowest wind speed
+        if (i == 0 || windSpeeds[i] < minSpeed) {
+            minSpeed = windSpeeds[i];
+            minDay = i + 1;
+        }
+    }
+
+    // Calculate average wind speed
+    float average = sum / NUM_DAYS;
+
+    // Print results
+    printf("\nAverage wind speed over two weeks: %.2f\n", average);
+    printf("Day with the highest wind speed: Day %d\n", maxDay);
+    printf("Day with the lowest wind speed: Day %d\n", minDay);
+    printf("\nDifference between highest wind speed and each day's average wind speed:\n");
+    for (int i = 0; i < NUM_DAYS; i++) {
+        printf("Day %d: %.2f\n", i + 1, maxSpeed - windSpeeds[i]);
+    }
+
+    return 0;
+}
+This program allows the user to enter the fastest wind speed for each day for two weeks. It calculates the average wind
+
+
