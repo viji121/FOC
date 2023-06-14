@@ -1,0 +1,118 @@
+#include <stdio.h>
+
+#define MAX_ALUMNI 95
+
+struct Alumni {
+    int age;
+    char gender;
+    char maritalStatus;
+    char collegeMajor[50];
+    float salary;
+};
+
+int main() {
+    struct Alumni alumni[MAX_ALUMNI];
+    int numQuestionnaires;
+
+    // Enter the number of questionnaires returned
+    printf("Enter the number of questionnaires returned: ");
+    scanf("%d", &numQuestionnaires);
+
+    // Enter alumni details
+    printf("\nEnter alumni details:\n");
+    for (int i = 0; i < numQuestionnaires; i++) {
+        printf("\nAlumni %d:\n", i + 1);
+        printf("Age: ");
+        scanf("%d", &alumni[i].age);
+        printf("Gender (M/F): ");
+        scanf(" %c", &alumni[i].gender);
+        printf("Marital Status (S/M): ");
+        scanf(" %c", &alumni[i].maritalStatus);
+        printf("College Major: ");
+        scanf("%s", alumni[i].collegeMajor);
+        printf("Salary: ");
+        scanf("%f", &alumni[i].salary);
+    }
+
+    // Get user input for two sets of items
+    int set1, set2;
+    printf("\nEnter the indices of the two sets of items (1-5):\n");
+    printf("Set 1: ");
+    scanf("%d", &set1);
+    printf("Set 2: ");
+    scanf("%d", &set2);
+
+    // Validate user input
+    if (set1 < 1 || set1 > 5 || set2 < 1 || set2 > 5) {
+        printf("\nInvalid set indices!\n");
+        return 0;
+    }
+
+    // Calculate average salary for the given sets of items
+    float sumSalary = 0.0;
+    int count = 0;
+
+    for (int i = 0; i < numQuestionnaires; i++) {
+        if ((set1 == 1 && set2 == 2) || (set1 == 2 && set2 == 1)) {
+            if (alumni[i].age > 0 && alumni[i].gender != '\0') {
+                sumSalary += alumni[i].salary;
+                count++;
+            }
+        } else if ((set1 == 1 && set2 == 3) || (set1 == 3 && set2 == 1)) {
+            if (alumni[i].age > 0 && alumni[i].maritalStatus != '\0') {
+                sumSalary += alumni[i].salary;
+                count++;
+            }
+        } else if ((set1 == 1 && set2 == 4) || (set1 == 4 && set2 == 1)) {
+            if (alumni[i].age > 0 && alumni[i].collegeMajor[0] != '\0') {
+                sumSalary += alumni[i].salary;
+                count++;
+            }
+        } else if ((set1 == 1 && set2 == 5) || (set1 == 5 && set2 == 1)) {
+            if (alumni[i].age > 0 && alumni[i].salary > 0) {
+                sumSalary += alumni[i].salary;
+                count++;
+            }
+        } else if ((set1 == 2 && set2 == 3) || (set1 == 3 && set2 == 2)) {
+            if (alumni[i].gender != '\0' && alumni[i].maritalStatus != '\0') {
+                sumSalary += alumni[i].salary;
+                count++;
+            }
+        } else if ((set1 == 2 && set2 == 4) || (set1 == 4 && set2 == 2)) {
+            if (alumni[i].gender != '\0' && alumni[i].collegeMajor[0] != '\0') {
+                sumSalary += alumni[i].salary;
+                count++;
+            }
+        } else if ((set1 == 2 && set2 == 5) || (set1 == 5 && set2 == 2)) {
+            if (alumni[i].gender != '\0' && alumni[i].salary > 0) {
+                sumSalary += alumni[i].salary;
+                count++;
+            }
+        } else if ((set1 == 3 && set2 == 4) || (set1 == 4 && set2 == 3)) {
+            if (alumni[i].maritalStatus != '\0' && alumni[i].collegeMajor[0] != '\0') {
+                sumSalary += alumni[i].salary;
+                count++;
+            }
+        } else if ((set1 == 3 && set2 == 5) || (set1 == 5 && set2 == 3)) {
+            if (alumni[i].maritalStatus != '\0' && alumni[i].salary > 0) {
+                sumSalary += alumni[i].salary;
+                count++;
+            }
+        } else if ((set1 == 4 && set2 == 5) || (set1 == 5 && set2 == 4)) {
+            if (alumni[i].collegeMajor[0] != '\0' && alumni[i].salary > 0) {
+                sumSalary += alumni[i].salary;
+                count++;
+            }
+        }
+    }
+
+    // Calculate and print the average salary
+    if (count > 0) {
+        float avgSalary = sumSalary / count;
+        printf("\nAverage Salary: %.2f\n", avgSalary);
+    } else {
+        printf("\nNo data available for the selected sets of items.\n");
+    }
+
+    return 0;
+}
