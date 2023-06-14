@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int main() {
+    float startingOdometer, endingOdometer;
+    float totalGallons = 0.0, totalMiles = 0.0, averageMPG;
+    int fillups = 6;
+
+    printf("Enter the starting odometer reading: ");
+    scanf("%f", &startingOdometer);
+
+    for (int i = 1; i <= fillups; i++) {
+        float gallons;
+        printf("Enter the number of gallons at fillup %d: ", i);
+        scanf("%f", &gallons);
+        totalGallons += gallons;
+
+        printf("Enter the odometer reading at fillup %d: ", i);
+        scanf("%f", &endingOdometer);
+
+        float miles = endingOdometer - startingOdometer;
+        totalMiles += miles;
+
+        startingOdometer = endingOdometer;
+    }
+
+    averageMPG = totalMiles / totalGallons;
+
+    printf("Average MPG after %d fillups: %.2f\n", fillups, averageMPG);
+
+    return 0;
+}
