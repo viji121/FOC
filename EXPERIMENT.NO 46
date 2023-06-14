@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_STUDENTS 25
+#define MAX_NAME_LENGTH 50
+#define NUM_TESTS 4
+
+int main() {
+    char studentNames[MAX_STUDENTS][MAX_NAME_LENGTH];
+    int testScores[MAX_STUDENTS][NUM_TESTS];
+
+    // Enter the student names and test scores
+    printf("Enter the student names and test scores:\n");
+    for (int i = 0; i < MAX_STUDENTS; i++) {
+        printf("Student %d:\n", i + 1);
+        printf("Name: ");
+        scanf("%s", studentNames[i]);
+        for (int j = 0; j < NUM_TESTS; j++) {
+            printf("Test %d score: ", j + 1);
+            scanf("%d", &testScores[i][j]);
+        }
+    }
+
+    // Enter the student's name
+    char searchName[MAX_NAME_LENGTH];
+    printf("\nEnter the student's name: ");
+    scanf("%s", searchName);
+
+    // Search for the student's name and print the name and test scores
+    int found = 0;
+    for (int i = 0; i < MAX_STUDENTS; i++) {
+        if (strcmp(studentNames[i], searchName) == 0) {
+            printf("\nStudent Name: %s\n", studentNames[i]);
+            printf("Test Scores:\n");
+            for (int j = 0; j < NUM_TESTS; j++) {
+                printf("Test %d: %d\n", j + 1, testScores[i][j]);
+            }
+            found = 1;
+            break;
+        }
+    }
+
+    // If the student's name is not found, print a message
+    if (!found) {
+        printf("\nStudent with name '%s' not found.\n", searchName);
+    }
+
+    return 0;
+}
